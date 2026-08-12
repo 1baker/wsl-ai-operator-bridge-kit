@@ -20,6 +20,10 @@ resolve_powershell_bin() {
     printf '%s\n' "$AURACALL_WINDOWS_POWERSHELL_PATH"
     return
   fi
+  if command -v powershell.exe >/dev/null 2>&1; then
+    command -v powershell.exe
+    return
+  fi
   for candidate in \
     /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe \
     /mnt/c/Program\ Files/PowerShell/7/pwsh.exe
@@ -29,10 +33,6 @@ resolve_powershell_bin() {
       return
     fi
   done
-  if command -v powershell.exe >/dev/null 2>&1; then
-    command -v powershell.exe
-    return
-  fi
   printf '%s\n' powershell.exe
 }
 
@@ -42,7 +42,7 @@ if [ "$#" -gt 0 ]; then
   {
     printf '%s\n' "$*"
     printf ':quit\n'
-  } | "$powershell_bin" -NoLogo -NoProfile -ExecutionPolicy Bypass -File "$ps_script"
+  } | "$powershell_bin" -NoLogo -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "$ps_script"
 else
-  "$powershell_bin" -NoLogo -NoProfile -ExecutionPolicy Bypass -File "$ps_script"
+  "$powershell_bin" -NoLogo -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "$ps_script"
 fi
