@@ -1,5 +1,21 @@
 # WSL AI Operator Bridge Kit
 
+**In one sentence:** Small helper tools that let AI agents running in Linux (WSL) on a Windows PC use Windows programs such as PowerShell and Chrome safely and reliably.
+
+**Who it is for:** Developers running AI agents inside WSL on Windows.
+
+**How it works:**
+
+```mermaid
+flowchart LR
+    Agent[AI agent in WSL Linux] --> Kit[Bridge kit]
+    Kit -->|limited, logged requests| PS[Windows PowerShell]
+    Kit --> Chrome[Windows Chrome]
+```
+
+---
+
+
 Small utilities for AI-agent development on a Windows host with WSL Ubuntu.
 
 This repo packages the reusable pieces from local Aura-Call/Codex work:
